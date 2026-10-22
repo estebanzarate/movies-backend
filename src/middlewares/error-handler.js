@@ -1,6 +1,20 @@
+import { AppError } from "../utils/app-error.js";
+
 export function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
+  }
+
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      error: {
+        code: err.code,
+        message: err.message,
+        ...(err.details !== undefined && {
+          details: err.details,
+        }),
+      },
+    });
   }
 
   if (err.type === "entity.parse.failed") {
