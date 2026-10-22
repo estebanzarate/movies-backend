@@ -6,11 +6,12 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node --watch src/server.js",
-    "test": "node --test"
+    "dev": "node --env-file=.env --watch src/server.js",
+    "test": "node --env-file=.env --test"
   },
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
     "supertest": "^7.3.1"
